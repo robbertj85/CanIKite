@@ -4,6 +4,8 @@ import { weatherService } from '@/services/weatherService';
 import { calculateKiteability, isSpotKiteable } from '@/utils/kiteCalculator';
 import { SpotCondition } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;

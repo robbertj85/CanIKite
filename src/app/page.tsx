@@ -140,12 +140,18 @@ export default function Home() {
 
           <div className="md:col-span-3">
             {viewMode === 'map' ? (
-              <div className="h-[600px] w-full">
+              <div className="h-[700px] w-full relative">
                 <SpotMap
                   conditions={conditions}
                   selectedSpotId={selectedSpotId}
                   onSpotClick={setSelectedSpotId}
                 />
+                {spotCondition && viewMode === 'map' && (
+                  <SpotDetail
+                    condition={spotCondition}
+                    onClose={() => setSelectedSpotId(null)}
+                  />
+                )}
               </div>
             ) : (
               <SpotList
@@ -175,24 +181,63 @@ export default function Home() {
         </div>
       </div>
 
-      {spotCondition && (
+      {spotCondition && viewMode === 'list' && (
         <SpotDetail
           condition={spotCondition}
           onClose={() => setSelectedSpotId(null)}
         />
       )}
 
-      <footer className="bg-white border-t mt-12 py-6">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Info className="w-4 h-4 text-gray-500" />
-            <p className="text-sm text-gray-600">
-              Live weather data from Open-Meteo. Always check conditions on-site before kiting.
+      <footer className="bg-white border-t mt-12 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <Info className="w-4 h-4 text-gray-500" />
+              <p className="text-sm text-gray-600">
+                Live weather data from Open-Meteo. Always check conditions on-site before kiting.
+              </p>
+            </div>
+            <p className="text-xs text-gray-500">
+              © 2024 Can I Kite? | Made with ❤️ for the Dutch kitesurf community | No API keys needed!
             </p>
           </div>
-          <p className="text-xs text-gray-500">
-            © 2024 Can I Kite? | Made with ❤️ for the Dutch kitesurf community | No API keys needed!
-          </p>
+
+          <div className="border-t pt-6 mt-6">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3 text-center">Data Sources & Updates</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <h4 className="text-xs font-semibold text-gray-800 mb-2">Weather Data</h4>
+                <p className="text-xs text-gray-700 mb-1">
+                  Source: <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Open-Meteo API</a>
+                </p>
+                <p className="text-xs text-gray-600">
+                  Live weather conditions including wind speed, direction, temperature, and more.
+                  Data refreshed every hour from meteorological stations.
+                </p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Last fetched: {new Date().toLocaleString('nl-NL')}
+                </p>
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <h4 className="text-xs font-semibold text-gray-800 mb-2">Spot Information</h4>
+                <p className="text-xs text-gray-700 mb-1">
+                  Sources: Local kitesurfing communities, NKV, and spot guides
+                </p>
+                <p className="text-xs text-gray-600">
+                  Kitespot details including facilities, restrictions, hazards, and suitable conditions
+                  are curated from trusted local sources and community feedback.
+                </p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Total spots: {conditions.length} | Active update: {lastUpdate.toLocaleString('nl-NL')}
+                </p>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-500 text-center mt-4">
+              Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">OpenStreetMap</a> contributors
+            </p>
+          </div>
         </div>
       </footer>
     </div>

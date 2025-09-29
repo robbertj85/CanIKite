@@ -55,21 +55,21 @@ function SpotMapComponent({ conditions, selectedSpotId, onSpotClick }: SpotMapPr
             <div class="${clsx(
               'rounded-full p-2 shadow-lg border-2 cursor-pointer transform transition-all hover:scale-110',
               isKiteable
-                ? 'bg-green-500 border-green-600'
-                : 'bg-gray-400 border-gray-500',
+                ? 'bg-green-600 border-green-700'
+                : 'bg-gray-500 border-gray-600',
               selectedSpotId === spot.id && 'ring-4 ring-blue-500 scale-110'
             )}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
                 <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
                 <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/>
               </svg>
             </div>
-            <div class="absolute -bottom-1 -right-1 bg-white rounded-full px-1 text-xs font-bold ${
-              kiteability >= 80 ? 'text-green-600' :
-              kiteability >= 60 ? 'text-yellow-600' :
-              kiteability >= 40 ? 'text-orange-600' :
-              'text-red-600'
+            <div class="absolute -bottom-1 -right-1 bg-white rounded-full px-1.5 py-0.5 text-xs font-bold border border-gray-300 ${
+              kiteability >= 80 ? 'text-green-700' :
+              kiteability >= 60 ? 'text-yellow-700' :
+              kiteability >= 40 ? 'text-orange-700' :
+              'text-red-700'
             }">
               ${Math.round(weather.windSpeed)}
             </div>
@@ -90,25 +90,25 @@ function SpotMapComponent({ conditions, selectedSpotId, onSpotClick }: SpotMapPr
         // Create popup content
         const popupContent = `
           <div class="p-2 min-w-[200px]">
-            <h3 class="font-bold text-lg mb-1">${spot.name}</h3>
-            <p class="text-sm text-gray-600 mb-2">${spot.region}</p>
+            <h3 class="font-bold text-lg mb-1 text-gray-900">${spot.name}</h3>
+            <p class="text-sm text-gray-700 mb-2">${spot.region}</p>
             <div class="space-y-1 text-sm">
               <div class="flex justify-between">
-                <span>Wind:</span>
-                <span class="font-medium">${Math.round(weather.windSpeed)} kts ${degreesToCardinal(weather.windDirection)}</span>
+                <span class="text-gray-700">Wind:</span>
+                <span class="font-medium text-gray-900">${Math.round(weather.windSpeed)} kts ${degreesToCardinal(weather.windDirection)}</span>
               </div>
               <div class="flex justify-between">
-                <span>Kiteability:</span>
-                <span class="font-medium">${Math.round(kiteability)}%</span>
+                <span class="text-gray-700">Kiteability:</span>
+                <span class="font-medium text-gray-900">${Math.round(kiteability)}%</span>
               </div>
               <div class="flex justify-between">
-                <span>Status:</span>
-                <span class="font-medium ${isKiteable ? 'text-green-600' : 'text-red-600'}">
+                <span class="text-gray-700">Status:</span>
+                <span class="font-bold ${isKiteable ? 'text-green-700' : 'text-red-700'}">
                   ${isKiteable ? 'Kiteable' : 'Not Kiteable'}
                 </span>
               </div>
             </div>
-            <button class="mt-3 w-full bg-blue-500 text-white py-1 px-2 rounded text-sm hover:bg-blue-600 transition-colors">
+            <button class="mt-3 w-full bg-blue-600 text-white py-2 px-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">
               View Details
             </button>
           </div>
@@ -140,39 +140,43 @@ function SpotMapComponent({ conditions, selectedSpotId, onSpotClick }: SpotMapPr
       });
     });
 
+    // Don't cleanup map on every render - only on component unmount
+  }, [conditions, selectedSpotId, onSpotClick]);
+
+  // Cleanup only when component unmounts
+  useEffect(() => {
     return () => {
-      // Cleanup on unmount
       if (mapRef.current) {
         mapRef.current.remove();
         mapRef.current = null;
       }
     };
-  }, [conditions, selectedSpotId, onSpotClick]);
+  }, []);
 
   return (
     <div className="relative w-full h-full rounded-lg overflow-hidden shadow-lg">
-      <div ref={mapContainerRef} className="w-full h-full" />
+      <div ref={mapContainerRef} className="w-full h-full z-0" />
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3 z-[5]">
-        <h4 className="text-sm font-semibold mb-2">Legend</h4>
+      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3 z-10 border border-gray-200">
+        <h4 className="text-sm font-semibold mb-2 text-gray-900">Legend</h4>
         <div className="space-y-1 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-            <span>Kiteable</span>
+            <div className="w-4 h-4 bg-green-600 rounded-full"></div>
+            <span className="text-gray-700">Kiteable</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
-            <span>Not Kiteable</span>
+            <div className="w-4 h-4 bg-gray-500 rounded-full"></div>
+            <span className="text-gray-700">Not Kiteable</span>
           </div>
         </div>
       </div>
 
       {/* Wind info overlay */}
-      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-[5]">
+      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-10 border border-gray-200">
         <div className="flex items-center gap-2 text-sm">
           <Wind className="w-4 h-4 text-blue-600" />
-          <span className="font-medium">Click spots for details</span>
+          <span className="font-medium text-gray-900">Click spots for details</span>
         </div>
       </div>
 

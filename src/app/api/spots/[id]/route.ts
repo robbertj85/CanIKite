@@ -3,6 +3,8 @@ import { kiteSpotsNL } from '@/data/spots';
 import { weatherService } from '@/services/weatherService';
 import { calculateKiteability, isSpotKiteable } from '@/utils/kiteCalculator';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
