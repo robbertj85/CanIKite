@@ -82,7 +82,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
       )}>
         <div className="h-full md:h-auto bg-white md:rounded-lg md:shadow-md p-4 overflow-y-auto">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Filters</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
             <div className="flex gap-2">
               {hasActiveFilters && (
                 <button
@@ -103,7 +103,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
 
           <div className="space-y-6">
             <div>
-              <h4 className="font-medium text-sm mb-2">Region</h4>
+              <h4 className="font-medium text-sm mb-2 text-gray-900">Region</h4>
               <div className="space-y-2">
                 {regions.map(region => (
                   <label key={region} className="flex items-center gap-2 cursor-pointer">
@@ -113,24 +113,24 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
                       onChange={() => handleRegionToggle(region)}
                       className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                     />
-                    <span className="text-sm">{region}</span>
+                    <span className="text-sm text-gray-900">{region}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             <div>
-              <h4 className="font-medium text-sm mb-2">Wind Direction</h4>
+              <h4 className="font-medium text-sm mb-2 text-gray-900">Wind Direction</h4>
               <div className="grid grid-cols-4 gap-2">
                 {windDirections.map(dir => (
                   <button
                     key={dir}
                     onClick={() => handleWindDirectionToggle(dir)}
                     className={clsx(
-                      'py-1 px-2 text-xs rounded transition-colors',
+                      'py-1 px-2 text-xs rounded transition-colors font-medium',
                       filters.windDirections?.includes(dir)
                         ? 'bg-primary-600 text-white'
-                        : 'bg-gray-100 hover:bg-gray-200'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                     )}
                   >
                     {dir}
@@ -140,7 +140,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
             </div>
 
             <div>
-              <h4 className="font-medium text-sm mb-2">Water Type</h4>
+              <h4 className="font-medium text-sm mb-2 text-gray-900">Water Type</h4>
               <div className="space-y-2">
                 {(['sea', 'lake', 'river'] as const).map(type => (
                   <label key={type} className="flex items-center gap-2 cursor-pointer">
@@ -150,14 +150,14 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
                       onChange={() => handleWaterTypeToggle(type)}
                       className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                     />
-                    <span className="text-sm capitalize">{type}</span>
+                    <span className="text-sm capitalize text-gray-900">{type}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             <div>
-              <h4 className="font-medium text-sm mb-2">Other</h4>
+              <h4 className="font-medium text-sm mb-2 text-gray-900">Other</h4>
               <div className="space-y-2">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -166,7 +166,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
                     onChange={(e) => onFilterChange({ ...filters, tideIndependent: e.target.checked })}
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
-                  <span className="text-sm">Tide Independent Only</span>
+                  <span className="text-sm text-gray-900">Tide Independent Only</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -178,7 +178,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
                     })}
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
-                  <span className="text-sm">Kiteable Spots Only</span>
+                  <span className="text-sm text-gray-900">Kiteable Spots Only</span>
                 </label>
               </div>
             </div>
