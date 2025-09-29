@@ -33,7 +33,7 @@ export default function SpotDetail({ condition, onClose }: SpotDetailProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-[60] flex items-end sm:items-center justify-center">
       <div className="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-white border-b px-4 py-3 flex justify-between items-center">
           <h2 className="text-xl font-bold">{spot.name}</h2>

@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
-      <header className="bg-white shadow-sm sticky top-0 z-20">
+      <header className="bg-white shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

@@ -63,7 +63,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
       <button
         onClick={onToggle}
         className={clsx(
-          'fixed bottom-4 right-4 z-40 bg-primary-600 text-white p-3 rounded-full shadow-lg hover:bg-primary-700 transition-colors md:hidden',
+          'fixed bottom-4 right-4 z-50 bg-primary-600 text-white p-3 rounded-full shadow-lg hover:bg-primary-700 transition-colors md:hidden',
           hasActiveFilters && 'ring-2 ring-yellow-400'
         )}
       >
@@ -76,7 +76,7 @@ export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle 
       </button>
 
       <div className={clsx(
-        'fixed md:relative inset-0 md:inset-auto z-30 md:z-auto bg-white md:bg-transparent',
+        'fixed md:relative inset-0 md:inset-auto z-40 md:z-auto bg-white md:bg-transparent',
         'transform transition-transform md:transform-none',
         isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       )}>

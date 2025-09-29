@@ -154,7 +154,7 @@ function SpotMapComponent({ conditions, selectedSpotId, onSpotClick }: SpotMapPr
       <div ref={mapContainerRef} className="w-full h-full" />
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3 z-10">
+      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3 z-[5]">
         <h4 className="text-sm font-semibold mb-2">Legend</h4>
         <div className="space-y-1 text-xs">
           <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ function SpotMapComponent({ conditions, selectedSpotId, onSpotClick }: SpotMapPr
       </div>
 
       {/* Wind info overlay */}
-      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-10">
+      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 z-[5]">
         <div className="flex items-center gap-2 text-sm">
           <Wind className="w-4 h-4 text-blue-600" />
           <span className="font-medium">Click spots for details</span>
